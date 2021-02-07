@@ -1,20 +1,36 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <Navbar />
+    <div class="modal-body row">
+      <div class="col-md-6">
+        <!-- Your first column here -->
+        <Table/>
+      </div>
+      <div class="col-md-6">
+        <!-- Your second column here -->
+        <Chart/>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Navbar from "./components/Navbar.vue";
+import Table from "./components/Table.vue";
+import Chart from "./components/Chart.vue";
+
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    Navbar,
+    Table,
+    Chart,
+  },
+};
+
 </script>
+
 
 <style>
 #app {
