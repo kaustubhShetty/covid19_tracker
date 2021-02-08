@@ -205,11 +205,11 @@ export default {
     "$store.state.stateName": () => {
       console.log(store.state.stateName);
       // console.log("Hahahahahah");
-    for (let i = 0; i < this.states_daily_list.length; i = i + 3) {
-        this.confirmed_cases_list.push(
-          parseInt(this.states_daily_list[i][statename])
-        );
-       }
+    // for (let i = 0; i < this.states_daily_list.length; i = i + 3) {
+    //     this.confirmed_cases_list.push(
+    //       parseInt(this.states_daily_list[i][statename])
+    //     );
+    //    }
 
       //location.reload();
       //this.$forceUpdate();
