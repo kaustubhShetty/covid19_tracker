@@ -145,6 +145,7 @@ export default {
     getStateName(stateName){
       this.stateName = stateName;
       this.$store.state.stateName = this.stateName;
+      //this.$forceUpdate();  
       //console.log(this.stateName);
     }
   },

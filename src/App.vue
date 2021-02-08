@@ -1,4 +1,4 @@
-<template>
+<template id='background'>
   <div>
     <Navbar />
     <div class="modal-body row">
@@ -33,6 +33,9 @@ export default {
 
 
 <style>
+body{ 
+  background-color: #ffffff;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
