@@ -1,7 +1,8 @@
 <template>
   <div>
     <div class="container">
-      <table class="table table-striped">
+      <table class="table table-striped" style="cursor: pointer;"
+>
         <thead class="thead-dark">
           <tr>
             <th scope="col">State/UT</th>
@@ -156,6 +157,9 @@ export default {
 
 
 <style>
+.sortable tr {
+    cursor: pointer;
+}
 </style>
 
 //if(this.states_daily_list[i].status==="Confirmed"){

@@ -6,6 +6,8 @@
     <!-- <input type="hidden" value="mh" v-on:change= "this.trigger()" />  -->
     <line-chart :key="componentKey" v-if="loaded" :chartdata="chartdata" />
     <!-- <div>{{ this.getConfirmedCasesforSpecificState() }}</div> -->
+    <!-- <label for="birthday">Birthday:</label> -->
+    <!-- <input type="date" id="birthday" name="birthday"> -->
   </div>
 </template>
 
@@ -54,6 +56,9 @@ export default {
     componentKey: 0,
     dates: [], //x axis array
     date: "",
+    filteredDatesList:[],
+    filteredConfirmedCasesList:[],
+    filteredRecoveredCasesList:[],
     t: "",
     month: {
       Jan: "01",
@@ -80,18 +85,8 @@ export default {
     DictionaryOfDatesAndConfirmedProperty: {},
     DictionaryOfDatesAndRecoveredProperty: {},
     chartData: null,
-    // [
-    //   {
-    //     name: "Confirmed",
-    //     data: this.DictionaryOfDatesAndConfirmedProperty,
-    //   },
-    //    {
-    //      name: "Recovered",
-    //      data: this.DictionaryOfDatesAndRecoveredProperty,
-    //    },
-    // ],
   }),
-  async mounted() {
+   mounted() {  //async
     this.loaded = false;
     try {
       axios
@@ -134,38 +129,38 @@ export default {
   },
   methods: {
     reload() {
-      this.trigger();
+      //this.trigger();
       this.$forceUpdate();
     },
-    trigger() {
-      this.loaded = false;
-      console.log("IN TRIGGER");
-      this.getAllDates();
-      this.getConfirmedCasesforSpecificState();
-      this.getRecoveredCasesforSpecificState();
-      //this.DictionaryOfDatesAndConfirmed();
-      //this.DictionaryOfDatesAndRecovered();
-      this.chartdata = {
-        type: "line",
+    // trigger() {
+    //   this.loaded = false;
+    //   console.log("IN TRIGGER");
+    //   this.getAllDates();
+    //   this.getConfirmedCasesforSpecificState();
+    //   this.getRecoveredCasesforSpecificState();
+    //   //this.DictionaryOfDatesAndConfirmed();
+    //   //this.DictionaryOfDatesAndRecovered();
+    //   this.chartdata = {
+    //     type: "line",
 
-        labels: this.dates,
-        datasets: [
-          {
-            label: "Confirmed Cases",
-            backgroundColor: "#00FF00",
-            data: this.confirmed_cases_list,
-          },
-          {
-            label: "Recovered Cases",
-            backgroundColor: "#0000FF",
-            data: this.recovered_cases_list,
-          },
-        ],
-      };
-      this.renderChart(this.chartdata);
-      this.forceRerender();
-      this.loaded = true;
-    },
+    //     labels: this.dates,
+    //     datasets: [
+    //       {
+    //         label: "Confirmed Cases",
+    //         backgroundColor: "#00FF00",
+    //         data: this.confirmed_cases_list,
+    //       },
+    //       {
+    //         label: "Recovered Cases",
+    //         backgroundColor: "#0000FF",
+    //         data: this.recovered_cases_list,
+    //       },
+    //     ],
+    //   };
+    //   this.renderChart(this.chartdata);
+    //   this.forceRerender();
+    //   this.loaded = true;
+    // },
 
     forceRerender() {
       this.componentKey += 1;
@@ -186,6 +181,7 @@ export default {
         this.dates.push(this.states_daily_list[i]["date"]);
       }
       this.convertDate();
+      console.log(this.dates);
     },
     getConfirmedCasesforSpecificState() {
       this.confirmed_cases_list=[];
