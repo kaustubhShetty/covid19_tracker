@@ -1,8 +1,7 @@
 <template>
   <div>
     <div class="container">
-      <table class="table table-striped" style="cursor: pointer;"
->
+      <table class="table table-striped" style="cursor: pointer;">
         <thead class="thead-dark">
           <tr>
             <th scope="col">State/UT</th>
