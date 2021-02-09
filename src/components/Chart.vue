@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h1>State/UT:{{ this.$store.state.stateName }}</h1>
+    <h1>State/UT:{{ this.stateNewName }}</h1>
+    <!-- this.$store.state.stateName -->
     <!-- v-on:change="reload" -->
     <!-- <input type="hidden" value="mh" v-on:change= "this.trigger()" />  -->
     <line-chart :key="componentKey" v-if="loaded" :chartdata="chartdata" />
@@ -13,11 +14,40 @@
 import axios from "axios";
 import LineChart from "./LineChart.vue";
 import store from "../store";
+import { bus } from '../main';
 
 // import { Line } from 'vue-chartjs';
 
 export default {
   components: { LineChart },
+   created(){
+    bus.$on('changeIt',(data)=>{
+      this.stateNewName = data;
+      console.log(this.stateNewName);
+      this.getConfirmedCasesforSpecificState();
+      this.getRecoveredCasesforSpecificState();
+      console.log(this.confirmed_cases_list);
+      console.log(this.recovered_cases_list);
+      this.chartdata = {
+            type: "line",
+            labels: this.dates,
+            datasets: [
+              {
+                label: "Confirmed Cases",
+                backgroundColor: "#00FF00",
+                data: this.confirmed_cases_list,
+              },
+              {
+                label: "Recovered Cases",
+                backgroundColor: "#0000FF",
+                data: this.recovered_cases_list,
+              },
+            ],
+          };
+        this.forceRerender();
+        //this.$refs.chart.render()
+    })
+  },
   name: "Chart",
   data: () => ({
     loaded: false,
@@ -39,6 +69,7 @@ export default {
       Nov: "11",
       Dec: "12",
     },
+    stateNewName: "mh",
     states_daily_list: [],
     stateNameDuplicate: "",
     confirmed_cases_list: [], //confirmed array
@@ -69,8 +100,8 @@ export default {
           this.originalJsonData = response.data;
           //this.getStates();
           this.getAllDates();
-          this.getConfirmedCasesforSpecificState(this.$store.state.stateName);
-          this.getRecoveredCasesforSpecificState(this.$store.state.stateName);
+          this.getConfirmedCasesforSpecificState();
+          this.getRecoveredCasesforSpecificState();
           //this.DictionaryOfDatesAndConfirmed();
           //this.DictionaryOfDatesAndRecovered();
           this.chartdata = {
@@ -101,11 +132,6 @@ export default {
       console.log(e);
     }
   },
-  // mounted(){
-  //   console.log(this.DictionaryOfDatesAndConfirmedProperty+ "yohooo");
-  //       this.renderChart(this.chartdata, this.options)
-
-  // },
   methods: {
     reload() {
       this.trigger();
@@ -115,8 +141,8 @@ export default {
       this.loaded = false;
       console.log("IN TRIGGER");
       this.getAllDates();
-      this.getConfirmedCasesforSpecificState(this.$store.state.stateName);
-      this.getRecoveredCasesforSpecificState(this.$store.state.stateName);
+      this.getConfirmedCasesforSpecificState();
+      this.getRecoveredCasesforSpecificState();
       //this.DictionaryOfDatesAndConfirmed();
       //this.DictionaryOfDatesAndRecovered();
       this.chartdata = {
@@ -140,6 +166,7 @@ export default {
       this.forceRerender();
       this.loaded = true;
     },
+
     forceRerender() {
       this.componentKey += 1;
     },
@@ -160,21 +187,23 @@ export default {
       }
       this.convertDate();
     },
-    getConfirmedCasesforSpecificState(statename) {
-      console.log("Hahahahahah");
+    getConfirmedCasesforSpecificState() {
+      this.confirmed_cases_list=[];
+      console.log("ConfirmedCasesFunctionRan");
       for (let i = 0; i < this.states_daily_list.length; i = i + 3) {
         this.confirmed_cases_list.push(
-          parseInt(this.states_daily_list[i][statename])
+          parseInt(this.states_daily_list[i][this.stateNewName])
         );
       }
       //console.log(this.confirmed_cases_list);
       //return this.confirmed_cases_list;
     },
-    getRecoveredCasesforSpecificState(statename) {
+    getRecoveredCasesforSpecificState() {
+      this.recovered_cases_list=[];
+      console.log("RecoveredCasesFunctionRan");
       for (let i = 1; i < this.states_daily_list.length; i = i + 3) {
-        //console.log(this.states_daily_list[i][statename]);
         this.recovered_cases_list.push(
-          parseInt(this.states_daily_list[i][statename])
+          parseInt(this.states_daily_list[i][this.stateNewName])
         );
       }
       // console.log(this.recovered_cases_list);
@@ -204,20 +233,21 @@ export default {
   watch: {
     "$store.state.stateName": () => {
       console.log(store.state.stateName);
-      // console.log("Hahahahahah");
-    // for (let i = 0; i < this.states_daily_list.length; i = i + 3) {
-    //     this.confirmed_cases_list.push(
-    //       parseInt(this.states_daily_list[i][statename])
-    //     );
-    //    }
+      //     // console.log("Hahahahahah");
+      //   // for (let i = 0; i < this.states_daily_list.length; i = i + 3) {
+      //   //     this.confirmed_cases_list.push(
+      //   //       parseInt(this.states_daily_list[i][statename])
+      //   //     );
+      //   //    }
 
-      //location.reload();
-      //this.$forceUpdate();
-      //this.stateNameDuplicate = store.state.stateName;
-      // //console.log(this.stateNameDuplicate);
-      // this.getConfirmedCasesforSpecificState(store.state.stateName);
-      // this.getRecoveredCasesforSpecificState(store.state.stateName);
-    }
+      //     //location.reload();
+      //     //this.$forceUpdate();
+      //     //this.stateNameDuplicate = store.state.stateName;
+      //     // //console.log(this.stateNameDuplicate);
+      //     // this.getConfirmedCasesforSpecificState(store.state.stateName);
+      //     // this.getRecoveredCasesforSpecificState(store.state.stateName);
+      //   }
+    },
   },
 };
 </script>

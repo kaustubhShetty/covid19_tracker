@@ -6,8 +6,7 @@ import App from './App.vue'
 
 //import store from "./store";
 import store from './store'
-
-
+export const bus = new Vue();  //Event Bus instance
 
 //Vue.use(Chartkick.use(Chart))
 

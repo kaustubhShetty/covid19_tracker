@@ -24,6 +24,7 @@
 
 <script>
 import axios from "axios";
+import { bus } from '../main';
 
 export default {
   name: "Table",
@@ -145,6 +146,7 @@ export default {
     getStateName(stateName){
       this.stateName = stateName;
       this.$store.state.stateName = this.stateName;
+      bus.$emit('changeIt',this.stateName);
       //this.$forceUpdate();  
       //console.log(this.stateName);
     }
