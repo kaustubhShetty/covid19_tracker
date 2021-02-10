@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>State/UT:{{ this.stateNewName }}</h1>
-    <line-chart :key="componentKey" v-if="loaded" :chartdata="chartdata" />
+    <line-chart :key="componentKey" v-if="loaded" :chartdata="chartdata" /> <!--creates a line chart-->
   </div>
 </template>
 
@@ -15,7 +15,7 @@ import { bus } from "../main";
 export default {
   components: { LineChart },
   created() {
-    bus.$on("changeIt", (data) => {
+    bus.$on("changeIt", (data) => { //Helps create a channel between the table and chart component
       this.stateNewName = data;
       console.log(this.stateNewName);
       this.getConfirmedCasesforSpecificState();
@@ -39,9 +39,8 @@ export default {
         ],
       };
       this.forceRerender();
-      //this.$refs.chart.render()
       },
-
+//Helps create a channel between the form and chart component
       bus.$on('UpdateNewDates',(data)=>{  //Updates Chart for New Range of Dates
         this.fromDate=data[0];
         this.toDate = data[1];
@@ -117,8 +116,7 @@ export default {
               },
             ],
           };
-          this.loaded = true;
-          // handle success
+          this.loaded = true; // handle success
         })
         .catch((error) => {
           // handle error
@@ -129,12 +127,7 @@ export default {
     }
   },
   methods: {
-    reload() {
-      //this.trigger();
-      this.$forceUpdate();
-    },
-
-    forceRerender() {
+    forceRerender() {  //Re-renders the chart component
       this.componentKey += 1;
     },
 
@@ -177,8 +170,7 @@ export default {
           parseInt(this.states_daily_list[i][this.stateNewName])
         );
       }
-      //console.log(this.confirmed_cases_list);
-      //return this.confirmed_cases_list;
+      
     },
     getRecoveredCasesforSpecificState() {
       this.recovered_cases_list = [];
@@ -188,7 +180,6 @@ export default {
           parseInt(this.states_daily_list[i][this.stateNewName])
         );
       }
-      // console.log(this.recovered_cases_list);
     },
     
   },
@@ -206,8 +197,3 @@ export default {
   margin-top: 60px;
 }
 </style>
-
-// {
-//            "2017-01-01 00:00:00 -0800": 5,
-//            "2017-01-02 00:00:00 -0800": 3,
-//          },

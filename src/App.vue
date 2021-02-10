@@ -3,11 +3,11 @@
     <Navbar />
     <div class="modal-body row">
       <div class="col-md-6">
-        <!-- Your first column here -->
+        <!--  first column here -->
         <Table/>
       </div>
       <div class="col-md-6">
-        <!-- Your second column here -->
+        <!--  second column here -->
         <Chart/>
         <Form/>
       </div>

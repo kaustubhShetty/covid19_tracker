@@ -41,11 +41,11 @@ export default {
   },
   methods: {
     getTheValues() {
-      console.log(typeof document.getElementById("from").value);
-      console.log(typeof document.getElementById("to").value);
+      //console.log(typeof document.getElementById("from").value);
+      //console.log(typeof document.getElementById("to").value);
       this.fromVar = document.getElementById("from").value;
       this.toVar = document.getElementById("to").value;
-      bus.$emit("UpdateNewDates", [this.fromVar, this.toVar]);
+      bus.$emit("UpdateNewDates", [this.fromVar, this.toVar]);//Helps create a channel between the Form and Chart component
     },
   },
 };

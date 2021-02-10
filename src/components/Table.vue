@@ -93,9 +93,7 @@ export default {
         this.getTotalConfirmed();
         this.getTotalRecovered();
         this.createNewJsonListOfDictionaries();
-
         // handle success
-        //console.log(this.originalJsonData);
       })
       .catch((error) => {
         // handle error
@@ -139,16 +137,12 @@ export default {
           confirmed: this.totalConfirmedList[j],
           recovered: this.totalRecoveredList[j],
         });
-        //console.log(this.newJsonListOfDictionaries);
       }
-      //console.log(this.newJsonListOfDictionaries);
     },
     getStateName(stateName){
       this.stateName = stateName;
       this.$store.state.stateName = this.stateName;
-      bus.$emit('changeIt',this.stateName);
-      //this.$forceUpdate();  
-      //console.log(this.stateName);
+      bus.$emit('changeIt',this.stateName);  //Helps create a channel between the table and chart component
     }
   },
 };
