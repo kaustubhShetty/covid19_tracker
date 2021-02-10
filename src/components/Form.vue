@@ -1,13 +1,28 @@
 <template>
   <div>
-      <br>
-    <div class="container-fluid pt-4" style="border:1px solid #cecece; border-radius:15px;">
-      <label for="from">From :</label> -->
-      <input type="date" id="from" name="from" min="2020-03-14" /><br />
+    <br />
+    <div
+      class="container-fluid pt-4"
+      style="border: 1px solid #cecece; border-radius: 15px"
+    >
+    <h3 style="text-align: center">Set Date Range</h3>
+      <div class="card">
+        <div class="card-body">
+          <label for="from">From :</label> -->
+          <input type="date" id="from" name="from" min="2020-03-14" /><br />
+        </div>
+      </div>
       <br />
-      <label for="to">To :</label> --> 
-      <input type="date" id="to" name="to" /><br /><br />
-      <button v-on:click="getTheValues">Click Me</button><br />
+      <div class="card">
+        <div class="card-body">
+          <label for="to">To :</label> -->
+          <input type="date" id="to" name="to" /><br>
+        </div>
+      </div>
+      <br />
+      <button type="button" class="btn btn-primary" v-on:click="getTheValues">
+        Click Me</button
+      ><br /><br />
     </div>
   </div>
 </template>
@@ -26,8 +41,8 @@ export default {
   },
   methods: {
     getTheValues() {
-      console.log(typeof (document.getElementById("from").value));
-      console.log(typeof (document.getElementById("to").value));
+      console.log(typeof document.getElementById("from").value);
+      console.log(typeof document.getElementById("to").value);
       this.fromVar = document.getElementById("from").value;
       this.toVar = document.getElementById("to").value;
       bus.$emit("UpdateNewDates", [this.fromVar, this.toVar]);
