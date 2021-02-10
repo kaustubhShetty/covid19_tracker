@@ -161,17 +161,4 @@ export default {
 }
 </style>
 
-//if(this.states_daily_list[i].status==="Confirmed"){
-             
- //          }
-
- //console.log(this.states_daily_list[0].status);
-      //console.log(parseInt(this.states_daily_list[0]["kl"]));
-
-            //console.log(this.tempNumber);
-
-            //{state: this.state[j],Confirmed: this.totalConfirmedList[j],Recovered: this.totalRecoveredList[j]}
-<!-- <th scope="row">1</th> -->
-        <!--  <th scope="col">#</th> -->
-
   
