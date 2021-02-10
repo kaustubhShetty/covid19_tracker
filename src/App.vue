@@ -9,6 +9,7 @@
       <div class="col-md-6">
         <!-- Your second column here -->
         <Chart/>
+        <Form/>
       </div>
     </div>
   </div>
@@ -18,6 +19,8 @@
 import Navbar from "./components/Navbar.vue";
 import Table from "./components/Table.vue";
 import Chart from "./components/Chart.vue";
+import Form from "./components/Form.vue";
+
 
 
 export default {
@@ -26,6 +29,7 @@ export default {
     Navbar,
     Table,
     Chart,
+    Form,
   },
 };
 
