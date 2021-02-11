@@ -1,4 +1,7 @@
 # covid19_tracker
+## Deployed on
+
+https://evening-anchorage-90798.herokuapp.com/
 
 ## Project setup
 ```
