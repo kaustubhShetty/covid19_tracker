@@ -3,6 +3,10 @@
 
 https://evening-anchorage-90798.herokuapp.com/
 
+## Dataset link
+
+https://api.covid19india.org/states_daily.json
+
 ## Project setup
 ```
 npm install
